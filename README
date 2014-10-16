@@ -1,0 +1,6 @@
+The actual README file can be viewed in different formats:
+
+README.rst: ReStructured Text
+README.md: Markdown
+
+(this file only exists to keep the "gnu" option to automake happy)
