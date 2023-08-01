@@ -1,5 +1,5 @@
 # ===========================================================================
-#    http://www.gnu.org/software/autoconf-archive/ax_c_declare_block.html
+#    https://www.gnu.org/software/autoconf-archive/ax_c_declare_block.html
 # ===========================================================================
 #
 # SYNOPSIS
@@ -15,7 +15,7 @@
 #   quite a time already.
 #
 #   #define DECLARE_BLOCK_NEEDED says they need to be at the beginning of of
-#   a statement block. Additionlly two defines DECLARE_BLOCK { and
+#   a statement block. Additionally two defines DECLARE_BLOCK { and
 #   DECLARE_END } are being set. That makes it possible to do the following
 #   in your source code (which this macro is really made up for):
 #
@@ -46,7 +46,7 @@
 #   Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License along
-#   with this program. If not, see <http://www.gnu.org/licenses/>.
+#   with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 #   As a special exception, the respective Autoconf Macro's copyright owner
 #   gives unlimited permission to copy, distribute and modify the configure
@@ -61,13 +61,13 @@
 #   modified version of the Autoconf Macro, you may extend this special
 #   exception to the GPL to apply to your modified version as well.
 
-#serial 7
+#serial 11
 
 AC_DEFUN([AX_C_DECLARE_BLOCK],[dnl
 AC_CACHE_CHECK(
  [if C variables must be declared at the beginning of a block],
  ax_cv_c_declare_block,[
- AC_TRY_COMPILE([#include <stdio.h>
+ AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <stdio.h>
  int f() {
    char buffer[1024];
    fgets(buffer, 1024, stdin);
@@ -75,9 +75,9 @@ AC_CACHE_CHECK(
    for (i=0; i < ii; i++) {
      fputc(buffer[i], stdout);
    }
- }],
- [],
- ax_cv_c_declare_block=no, ax_cv_c_declare_block=yes)])
+ }]],
+ [])],
+ [ax_cv_c_declare_block=no], [ax_cv_c_declare_block=yes])])
  if test "$ax_cv_c_declare_block" = yes; then
    AC_DEFINE([DECLARE_BLOCK_NEEDED],[1],
     [if C variables must be declared at the beginning of a block])

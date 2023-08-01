@@ -1,5 +1,5 @@
 # ===========================================================================
-#     http://www.gnu.org/software/autoconf-archive/ax_check_strftime.html
+#    https://www.gnu.org/software/autoconf-archive/ax_check_strftime.html
 # ===========================================================================
 #
 # SYNOPSIS
@@ -19,13 +19,14 @@
 #   and this notice are preserved. This file is offered as-is, without any
 #   warranty.
 
-#serial 5
+#serial 8
 
 AU_ALIAS([AG_CHECK_STRFTIME], [AX_CHECK_STRFTIME])
 AC_DEFUN([AX_CHECK_STRFTIME],[
   AC_MSG_CHECKING([whether strftime() works])
   AC_CACHE_VAL([ax_cv_strftime],[
-  AC_TRY_RUN([#include <time.h>
+  AC_RUN_IFELSE([AC_LANG_SOURCE([[#include <time.h>
+#include <string.h>
 char t_buf[ 64 ];
 int main() {
   static const char z[] = "Thursday Aug 28 240";
@@ -40,7 +41,7 @@ int main() {
   tm.tm_yday  = 239; /* days since January 1 [0, 365] */
   tm.tm_isdst =  1;  /* flag for daylight savings time */
   strftime( t_buf, sizeof( t_buf ), "%A %b %d %j", &tm );
-  return (strcmp( t_buf, z ) != 0); }],[ax_cv_strftime=yes],[ax_cv_strftime=no],[ax_cv_strftime=no]
+  return (strcmp( t_buf, z ) != 0); }]])],[ax_cv_strftime=yes],[ax_cv_strftime=no],[ax_cv_strftime=no]
   ) # end of TRY_RUN]) # end of CACHE_VAL
 
   AC_MSG_RESULT([$ax_cv_strftime])

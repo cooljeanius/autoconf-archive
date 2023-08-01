@@ -1,5 +1,5 @@
 # ===========================================================================
-#      http://www.gnu.org/software/autoconf-archive/ax_lib_samtools.html
+#     https://www.gnu.org/software/autoconf-archive/ax_lib_samtools.html
 # ===========================================================================
 #
 # SYNOPSIS
@@ -57,7 +57,7 @@
 #   Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License along
-#   with this program. If not, see <http://www.gnu.org/licenses/>.
+#   with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 #   As a special exception, the respective Autoconf Macro's copyright owner
 #   gives unlimited permission to copy, distribute and modify the configure
@@ -72,7 +72,7 @@
 #   modified version of the Autoconf Macro, you may extend this special
 #   exception to the GPL to apply to your modified version as well.
 
-#serial 2
+#serial 4
 
 AC_DEFUN([AX_LIB_SAMTOOLS],
 #
@@ -122,11 +122,10 @@ if test -n "${SAMTOOLS_HOME}" ; then
         SAMTOOLS_OLD_CPPFLAGS=$LDFLAGS
         LDFLAGS="$LDFLAGS ${SAMTOOLS_LIBDIR}"
         CPPFLAGS="$CPPFLAGS ${SAMTOOLS_INCDIR}"
-        AC_LANG_SAVE
-        AC_LANG_C
+        AC_LANG_PUSH([C])
         AC_CHECK_HEADER([sam.h], [ac_cv_sam_h=yes], [ac_cv_sam_h=no])
         AC_CHECK_LIB([bam], [sam_open], [ac_cv_libbam=yes], [ac_cv_libbam=no])
-        AC_LANG_RESTORE
+        AC_LANG_POP([C])
         if test "$ac_cv_libbam" = "yes" && test "$ac_cv_sam_h" = "yes" ; then
                 #
                 # If both library and header were found, use them

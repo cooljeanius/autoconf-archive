@@ -1,6 +1,6 @@
-# ==============================================================================
-#  http://www.gnu.org/software/autoconf-archive/ax_cxx_have_empty_iostream.html
-# ==============================================================================
+# ===============================================================================
+#  https://www.gnu.org/software/autoconf-archive/ax_cxx_have_empty_iostream.html
+# ===============================================================================
 #
 # SYNOPSIS
 #
@@ -26,7 +26,7 @@
 #   Public License for more details.
 #
 #   You should have received a copy of the GNU General Public License along
-#   with this program. If not, see <http://www.gnu.org/licenses/>.
+#   with this program. If not, see <https://www.gnu.org/licenses/>.
 #
 #   As a special exception, the respective Autoconf Macro's copyright owner
 #   gives unlimited permission to copy, distribute and modify the configure
@@ -41,21 +41,20 @@
 #   modified version of the Autoconf Macro, you may extend this special
 #   exception to the GPL to apply to your modified version as well.
 
-#serial 5
+#serial 7
 
 AU_ALIAS([AC_CXX_HAVE_EMPTY_IOSTREAM], [AX_CXX_HAVE_EMPTY_IOSTREAM])
 AC_DEFUN([AX_CXX_HAVE_EMPTY_IOSTREAM],
 [AC_CACHE_CHECK(whether the compiler allow empty iostream,
 ax_cv_cxx_have_empty_iostream,
 [AC_REQUIRE([AX_CXX_NAMESPACES])
-  AC_LANG_SAVE
-  AC_LANG_CPLUSPLUS
-  AC_TRY_COMPILE([#include <iostream>
+  AC_LANG_PUSH([C++])
+  AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[#include <iostream>
 #ifdef HAVE_NAMESPACES
 using namespace std;
-#endif],[iostream iostr; return 0;],
-  ax_cv_cxx_have_empty_iostream=yes, ax_cv_cxx_have_empty_iostream=no)
-  AC_LANG_RESTORE
+#endif]], [[iostream iostr; return 0;]])],
+  [ax_cv_cxx_have_empty_iostream=yes], [ax_cv_cxx_have_empty_iostream=no])
+  AC_LANG_POP([C++])
 ])
 if test "$ax_cv_cxx_have_empty_iostream" = yes; then
    AC_DEFINE(HAVE_EMPTY_IOSTREAM,,[define if the compiler allow empty
