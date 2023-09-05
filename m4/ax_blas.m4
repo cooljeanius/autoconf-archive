@@ -64,7 +64,7 @@
 #   modified version of the Autoconf Macro, you may extend this special
 #   exception to the GPL to apply to your modified version as well.
 
-#serial 19
+#serial 21
 
 AU_ALIAS([ACX_BLAS], [AX_BLAS])
 AC_DEFUN([AX_BLAS], [
@@ -109,6 +109,13 @@ if test $ax_blas_ok = no; then
 	AC_LINK_IFELSE([AC_LANG_CALL([], [$sgemm])], [ax_blas_ok=yes])
 	AC_MSG_RESULT($ax_blas_ok)
 	LIBS="$save_LIBS"
+fi
+
+# BLAS linked to by flexiblas? (Default on FC33+ and RHEL9+)
+
+if test $ax_blas_ok = no; then
+	AC_CHECK_LIB(flexiblas, $sgemm, [ax_blas_ok=yes
+			                BLAS_LIBS="-lflexiblas"])
 fi
 
 # BLAS in OpenBLAS library? (http://xianyi.github.com/OpenBLAS/)
