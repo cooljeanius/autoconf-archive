@@ -1,6 +1,8 @@
 # .travis.yml
 
 language: c
+os: linux
+dist: xenial
 git:
   depth: 50000
 
